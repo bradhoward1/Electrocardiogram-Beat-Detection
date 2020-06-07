@@ -11,15 +11,22 @@ def import_name():
 
 
 def import_data(filename):
-    contents = list()
+    time = list()
+    voltage = list()
     with open(filename, 'r') as input_file:
         file = input_file.readlines()
         for line in file:
             line = line.strip("\n")
             output = string_split(line)
             output = str_to_float(output)
-            contents.append(output)
-        return contents
+            time.append(output[0])
+            voltage.append(output[1])
+        return time, voltage
+
+
+def string_split(string):
+    output = string.split(",")
+    return output
 
 
 def str_to_float(input_results):
@@ -33,9 +40,9 @@ def str_to_float(input_results):
     return data
 
 
-def string_split(string):
-    output = string.split(",")
-    return output
+def float_check(nums):
+    result = all(isinstance(n, float) for n in nums)
+    return result
 
 
 if __name__ == '__main__':

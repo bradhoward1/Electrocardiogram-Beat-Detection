@@ -24,3 +24,13 @@ def test_str_to_float(result, expected):
     from ecg_analysis import str_to_float
     answer = str_to_float(result)
     assert answer == expected
+
+
+@pytest.mark.parametrize("result, expected",
+                         [(["dope", 9], False),
+                          ([9.2, 0.2], True),
+                          (["dope"], False)])
+def test_float_check(result, expected):
+    from ecg_analysis import float_check
+    answer = float_check(result)
+    assert answer == expected
