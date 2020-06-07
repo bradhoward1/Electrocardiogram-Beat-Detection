@@ -40,9 +40,23 @@ def float_check(nums):
     return result
 
 
-def line_manip():
-    pass
+def line_manip(contents):
+    time = list()
+    voltage = list()
+    for line in contents:
+        line = string_split(line)
+        data = str_to_float(line)
+        if float_check(data) is False:
+            continue
+        elif len(data) != 2:
+            continue
+        else:
+            time.append(data[0])
+            voltage.append(data[1])
+    return time, voltage
 
 
 if __name__ == '__main__':
     filename = import_name()
+    contents = import_data(filename)
+    time, voltage = line_manip(contents)
