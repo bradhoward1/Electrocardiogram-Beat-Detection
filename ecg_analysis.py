@@ -3,6 +3,7 @@
 
 import json
 import sys
+import logging
 
 
 def import_name():
@@ -30,7 +31,7 @@ def str_to_float(input_results):
         try:
             i = float(i)
         except ValueError:
-            print("Not a convertable string")
+            logging.error("This set of data is not usable: line skipped")
         data.append(i)
     return data
 
@@ -49,7 +50,7 @@ def line_manip(contents):
         if float_check(data) is False:
             continue
         elif len(data) != 2:
-            continue
+            continue 
         else:
             time.append(data[0])
             voltage.append(data[1])
@@ -57,6 +58,10 @@ def line_manip(contents):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename="my_code.log", filemode='w',
+                        level=logging.DEBUG)
+    logging.info("--------New Run--------\n")
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
+    logging.info("********End of Run********\n")
