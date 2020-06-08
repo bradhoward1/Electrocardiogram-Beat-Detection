@@ -38,7 +38,7 @@ def test_float_check(result, expected):
 
 def test_line_manip_time():
     from ecg_analysis import line_manip
-    contents = ["8,2.0\n", "word,3\n", "word\n", "8\n", "2,3\n"]
+    contents = ["8,2.0\n", "word,3\n", "word\n", "8\n", "2,3\n", "NaN,3\n"]
     expected_time = [8.0, 2.0]
     time, voltage = line_manip(contents)
     assert time == expected_time
@@ -46,7 +46,17 @@ def test_line_manip_time():
 
 def test_line_manip_voltage():
     from ecg_analysis import line_manip
-    contents = ["8,2.0\n", "word,3\n", "word\n", "8\n", "2,3\n"]
+    contents = ["8,2.0\n", "word,3\n", "word\n", "8\n", "2,3\n", "3,NaN\n"]
     expected_voltage = [2.0, 3.0]
     time, voltage = line_manip(contents)
     assert voltage == expected_voltage
+
+
+@pytest.mark.parametrize("results, expected",
+                         [([300.0, 100.0, 200.0, -300.0], True),
+                          ([100.0, 400.0, 200.0], False),
+                          ([-400.0, 300.0, 200.0, 123.23], False)])
+def test_norm_range(results, expected):
+    from ecg_analysis import norm_range
+    answer = norm_range(results)
+    assert answer == expected

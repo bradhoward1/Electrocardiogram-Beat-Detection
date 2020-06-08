@@ -1,3 +1,5 @@
 venv
 __pycache__
 try.csv
+my_code.log
+test_data/.ipynb_checkpoints
