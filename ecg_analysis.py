@@ -4,6 +4,7 @@
 import json
 import sys
 import logging
+import math
 
 
 def import_name():
@@ -51,6 +52,9 @@ def line_manip(contents):
             continue
         elif len(data) != 2:
             continue
+        elif math.isnan(data[1]) is True or math.isnan(data[0]) is True:
+            logging.error("This line of data is not usable: line skipped")
+            continue
         else:
             time.append(data[0])
             voltage.append(data[1])
@@ -72,5 +76,6 @@ if __name__ == '__main__':
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
-    print(norm_range(voltage))
+    print(time)
+    print(voltage)
     logging.info("********End of Run********\n")
