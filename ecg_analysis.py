@@ -31,7 +31,7 @@ def str_to_float(input_results):
         try:
             i = float(i)
         except ValueError:
-            logging.error("This set of data is not usable: line skipped")
+            logging.error("This line of data is not usable: line skipped")
         data.append(i)
     return data
 
@@ -50,11 +50,19 @@ def line_manip(contents):
         if float_check(data) is False:
             continue
         elif len(data) != 2:
-            continue 
+            continue
         else:
             time.append(data[0])
             voltage.append(data[1])
     return time, voltage
+
+
+def norm_range(voltage):
+    result = all(elem >= -300.0 and elem <= 300.0 for elem in voltage)
+    if result is False:
+        logging.warning('The voltage data contains an element outside'
+                        ' of the normal range of +/- 300 mV')
+    return result
 
 
 if __name__ == '__main__':
@@ -64,4 +72,5 @@ if __name__ == '__main__':
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
+    print(norm_range(voltage))
     logging.info("********End of Run********\n")

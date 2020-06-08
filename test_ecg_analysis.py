@@ -50,3 +50,13 @@ def test_line_manip_voltage():
     expected_voltage = [2.0, 3.0]
     time, voltage = line_manip(contents)
     assert voltage == expected_voltage
+
+
+@pytest.mark.parametrize("results, expected",
+                         [([300.0, 100.0, 200.0, -300.0], True),
+                          ([100.0, 400.0, 200.0], False),
+                          ([-400.0, 300.0, 200.0, 123.23], False)])
+def test_norm_range(results, expected):
+    from ecg_analysis import norm_range
+    answer = norm_range(results)
+    assert answer == expected
