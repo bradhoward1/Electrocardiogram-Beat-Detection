@@ -60,3 +60,11 @@ def test_norm_range(results, expected):
     from ecg_analysis import norm_range
     answer = norm_range(results)
     assert answer == expected
+
+
+def test_duration():
+    from ecg_analysis import duration
+    time = [0.0, 1.0, 2.0, 3.0, 4.0, 10.0]
+    answer = duration(time)
+    expected = 10.0
+    assert answer == expected

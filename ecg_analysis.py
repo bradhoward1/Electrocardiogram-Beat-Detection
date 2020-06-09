@@ -69,6 +69,12 @@ def norm_range(voltage):
     return result
 
 
+def duration(time):
+    length_list = len(time)
+    answer = time[length_list-1] - time[0]
+    return answer
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
