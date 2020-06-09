@@ -75,6 +75,13 @@ def duration(time):
     return answer
 
 
+def voltage_ex(voltage):
+    max_vol = max(voltage)
+    min_vol = min(voltage)
+    extremes = (min_vol, max_vol)
+    return extremes
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)

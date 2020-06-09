@@ -68,3 +68,11 @@ def test_duration():
     answer = duration(time)
     expected = 10.0
     assert answer == expected
+
+
+def test_voltage_ex():
+    from ecg_analysis import voltage_ex
+    voltage = [300.0, -290.0, 100.0, 45.0, -291.0, 0.0]
+    answer = voltage_ex(voltage)
+    expected = (-291.0, 300.0)
+    assert answer == expected
