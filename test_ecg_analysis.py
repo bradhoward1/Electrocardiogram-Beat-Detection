@@ -190,7 +190,7 @@ def test_counting_peaks():
 
 def test_heart_rate():
     from ecg_analysis import heart_rate
-    answer = heart_rate(30.0, 40.0)
+    answer = heart_rate(30.0, 40)
     expected = 80.0
     assert answer == expected
 
@@ -201,4 +201,20 @@ def test_beats():
     voltage = [0.0, 100.0, 200.0, 300.0, 200.0, 100.0]
     answer = beats(time, voltage)
     expected = [3.0]
+    assert answer == expected
+
+
+def test_metrics():
+    from ecg_analysis import metrics
+    time_dur = 30.0
+    extremes = (-100.0, 300.0)
+    num_beats = 40
+    mean_hr = 80.0
+    list_of_times = [1.0, 2.0, 3.0]
+    answer = metrics(time_dur, extremes, num_beats, mean_hr, list_of_times)
+    expected = {"duration": 30.0,
+                "voltage_extremes": (-100.0, 300.0),
+                "num_beats": 40,
+                "mean_hr_bpm": 80.0,
+                "beats": list_of_times}
     assert answer == expected

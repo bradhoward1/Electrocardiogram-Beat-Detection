@@ -102,6 +102,15 @@ def beats(time, voltage):
     return list_of_times
 
 
+def metrics(time_dur, extremes, count, mean_hr, list_of_times):
+    metrics_dict = {"duration": time_dur,
+                    "voltage_extremes": extremes,
+                    "num_beats": count,
+                    "mean_hr_bpm": mean_hr,
+                    "beats": list_of_times}
+    return metrics_dict
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
