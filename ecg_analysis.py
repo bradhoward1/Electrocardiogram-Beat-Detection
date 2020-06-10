@@ -5,6 +5,7 @@ import json
 import sys
 import logging
 import math
+from scipy.signal import find_peaks
 
 
 def import_name():
@@ -69,6 +70,47 @@ def norm_range(voltage):
     return result
 
 
+def duration(time):
+    length_list = len(time)
+    answer = time[length_list-1] - time[0]
+    return answer
+
+
+def voltage_ex(voltage):
+    max_vol = max(voltage)
+    min_vol = min(voltage)
+    extremes = (min_vol, max_vol)
+    return extremes
+
+
+def counting_peaks(voltage):
+    peaks, _ = find_peaks(voltage, distance=190)
+    count = len(peaks)
+    return count
+
+
+def heart_rate(length_of_strip, count):
+    mean_hr = count/length_of_strip * 60     # 60 sec / min
+    return mean_hr
+
+
+def beats(time, voltage):
+    list_of_times = list()
+    peaks, _ = find_peaks(voltage, distance=190)
+    for peak in peaks:
+        list_of_times.append(time[peak])
+    return list_of_times
+
+
+def metrics(time_dur, extremes, count, mean_hr, list_of_times):
+    metrics_dict = {"duration": time_dur,
+                    "voltage_extremes": extremes,
+                    "num_beats": count,
+                    "mean_hr_bpm": mean_hr,
+                    "beats": list_of_times}
+    return metrics_dict
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
@@ -76,6 +118,6 @@ if __name__ == '__main__':
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
-    print(time)
+    count = finding_peaks(voltage)
     print(voltage)
     logging.info("********End of Run********\n")
