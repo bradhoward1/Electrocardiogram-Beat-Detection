@@ -193,3 +193,12 @@ def test_heart_rate():
     answer = heart_rate(30.0, 40.0)
     expected = 80.0
     assert answer == expected
+
+
+def test_beats():
+    from ecg_analysis import beats
+    time = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]
+    voltage = [0.0, 100.0, 200.0, 300.0, 200.0, 100.0]
+    answer = beats(time, voltage)
+    expected = [3.0]
+    assert answer == expected

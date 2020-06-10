@@ -94,6 +94,14 @@ def heart_rate(length_of_strip, count):
     return mean_hr
 
 
+def beats(time, voltage):
+    list_of_times = list()
+    peaks, _ = find_peaks(voltage, distance=190)
+    for peak in peaks:
+        list_of_times.append(time[peak])
+    return list_of_times
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
