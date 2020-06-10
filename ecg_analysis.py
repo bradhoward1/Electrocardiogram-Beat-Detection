@@ -71,12 +71,14 @@ def norm_range(voltage):
 
 
 def duration(time):
+    logging.info("Determining duration of the ECG strip")
     length_list = len(time)
     answer = time[length_list-1] - time[0]
     return answer
 
 
 def voltage_ex(voltage):
+    logging.info("Determining the voltage extremes")
     max_vol = max(voltage)
     min_vol = min(voltage)
     extremes = (min_vol, max_vol)
@@ -84,17 +86,20 @@ def voltage_ex(voltage):
 
 
 def counting_peaks(voltage):
+    logging.info("Determining the number of beats in the ECG strip")
     peaks, _ = find_peaks(voltage, distance=190)
     count = len(peaks)
     return count
 
 
 def heart_rate(length_of_strip, count):
+    logging.info("Determining the estimated average heart rate")
     mean_hr = count/length_of_strip * 60     # 60 sec / min
     return mean_hr
 
 
 def beats(time, voltage):
+    logging.info("Determining the time stamps for each beat")
     list_of_times = list()
     peaks, _ = find_peaks(voltage, distance=190)
     for peak in peaks:
@@ -103,11 +108,13 @@ def beats(time, voltage):
 
 
 def metrics(time_dur, extremes, count, mean_hr, list_of_times):
+    logging.info("Dictionary being established")
     metrics_dict = {"duration": time_dur,
                     "voltage_extremes": extremes,
                     "num_beats": count,
                     "mean_hr_bpm": mean_hr,
                     "beats": list_of_times}
+    logging.info("Dictionary filled")
     return metrics_dict
 
 
