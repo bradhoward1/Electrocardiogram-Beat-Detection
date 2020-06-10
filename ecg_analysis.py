@@ -67,7 +67,7 @@ def norm_range(voltage):
     if result is False:
         logging.warning('The voltage data contains an element outside'
                         ' of the normal range of +/- 300 mV')
-    return True
+    return result
 
 
 def duration(time):
