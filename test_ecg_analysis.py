@@ -78,8 +78,8 @@ def test_voltage_ex():
     assert answer == expected
 
 
-def test_finding_peaks():
-    from ecg_analysis import finding_peaks
+def test_counting_peaks():
+    from ecg_analysis import counting_peaks
     voltage = [-0.145, 0.30929848070893795, 0.24402652364240104,
                -0.07730685613902885, -0.5602525139387842, -0.5583676167621484,
                -0.07165217130626704, 0.25219438991082055, 0.3462360937065653,
@@ -183,6 +183,13 @@ def test_finding_peaks():
                -0.06595967476768723, -0.5265720970503465, -0.47261513939620686,
                -0.13382568671037515, 0.36280317951883323, 0.369600398026759,
                -0.11843403757223779, -0.4548272130256344, -0.5201897790727434]
-    answer = finding_peaks(voltage)
+    answer = counting_peaks(voltage)
     expected = 2
+    assert answer == expected
+
+
+def test_heart_rate():
+    from ecg_analysis import heart_rate
+    answer = heart_rate(30.0, 40.0)
+    expected = 80.0
     assert answer == expected

@@ -83,10 +83,15 @@ def voltage_ex(voltage):
     return extremes
 
 
-def finding_peaks(voltage):
+def counting_peaks(voltage):
     peaks, _ = find_peaks(voltage, distance=190)
     count = len(peaks)
     return count
+
+
+def heart_rate(length_of_strip, count):
+    mean_hr = count/length_of_strip * 60     # 60 sec / min
+    return mean_hr
 
 
 if __name__ == '__main__':
