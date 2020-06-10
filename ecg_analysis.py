@@ -111,6 +111,13 @@ def metrics(time_dur, extremes, count, mean_hr, list_of_times):
     return metrics_dict
 
 
+def json_output(metrics_dict):
+    filename = import_name().split(".")[0] + '.json'
+    out_file = open(filename, "w")
+    json.dump(metrics_dict, out_file)
+    out_file.close()
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
@@ -118,6 +125,12 @@ if __name__ == '__main__':
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
-    count = finding_peaks(voltage)
-    print(voltage)
+    norm_range(voltage)
+    time_dur = duration(time)
+    extremes = voltage_ex(voltage)
+    count = counting_peaks(voltage)
+    mean_hr = heart_rate(time_dur, count)
+    list_of_times = beats(time, voltage)
+    metrics_dict = metrics(time_dur, extremes, count, mean_hr, list_of_times)
+    json_output(metrics_dict)
     logging.info("********End of Run********\n")
