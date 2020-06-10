@@ -5,6 +5,7 @@ import json
 import sys
 import logging
 import math
+from scipy.signal import find_peaks
 
 
 def import_name():
@@ -82,6 +83,12 @@ def voltage_ex(voltage):
     return extremes
 
 
+def finding_peaks(voltage):
+    peaks, _ = find_peaks(voltage, distance=190)
+    count = len(peaks)
+    return count
+
+
 if __name__ == '__main__':
     logging.basicConfig(filename="my_code.log", filemode='w',
                         level=logging.DEBUG)
@@ -89,6 +96,6 @@ if __name__ == '__main__':
     filename = import_name()
     contents = import_data(filename)
     time, voltage = line_manip(contents)
-    print(time)
+    count = finding_peaks(voltage)
     print(voltage)
     logging.info("********End of Run********\n")
