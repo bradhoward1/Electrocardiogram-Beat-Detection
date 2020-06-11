@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/BME547-Summer2020/ecg-analysis-bradhoward1.svg?token=sKsYGbJ1i9ydp1r9jhAy&branch=master)](https://travis-ci.com/BME547-Summer2020/ecg-analysis-bradhoward1)
 # ECG Analysis Assignment
 
 This README.md file provides an in-depth look at the `ecg_analysis.py` file, including how to run it and other important aspects. The information is provided below.
@@ -66,4 +67,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
